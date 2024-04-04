@@ -1,0 +1,17 @@
+15:02:34 **** Incremental Build of configuration Debug for project CG2028_Assign1 ****
+make -j32 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp -MMD -MP -MF"Src/convolve.d" -MT"Src/convolve.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/convolve.o" "../Src/convolve.s"
+arm-none-eabi-gcc -o "CG2028_Assign1.elf" @"objects.list"  -lrdimon -mcpu=cortex-m4 -T"C:\Users\USER\Desktop\CG2028\CG2028_Assign1\CG2028_Assign1\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CG2028_Assign1.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CG2028_Assign1.elf
+ 
+arm-none-eabi-size   CG2028_Assign1.elf 
+arm-none-eabi-objdump -h -S  CG2028_Assign1.elf  > "CG2028_Assign1.list"
+   text	   data	    bss	    dec	    hex	filename
+  17308	    480	   1760	  19548	   4c5c	CG2028_Assign1.elf
+Finished building: default.size.stdout
+ 
+Finished building: CG2028_Assign1.list
+ 
+
+15:02:35 Build Finished. 0 errors, 0 warnings. (took 671ms)
+

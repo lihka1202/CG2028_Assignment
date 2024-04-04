@@ -1,0 +1,10 @@
+15:04:22 **** Incremental Build of configuration Debug for project blink_pure_asm ****
+make -j32 all 
+arm-none-eabi-size   blink_pure_asm.elf 
+   text	   data	    bss	    dec	    hex	filename
+    744	     16	   1568	   2328	    918	blink_pure_asm.elf
+Finished building: default.size.stdout
+ 
+
+15:04:22 Build Finished. 0 errors, 0 warnings. (took 185ms)
+
