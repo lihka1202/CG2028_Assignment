@@ -18,7 +18,7 @@
 @ (c) ECE NUS, 2024
 
 @ Write Student 1’s Name here: Willson Han Zhekai - A0252890Y
-@ Write Student 2’s Name here:
+@ Write Student 2’s Name here: Muthya Narayanachary Akhil - A0229794L
 
 @ You could create a look-up table of registers here:
 @ R0 h[M]: signal
