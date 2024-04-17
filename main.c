@@ -72,7 +72,7 @@ int main(void)
 	// Necessary function to enable printf() using semihosting
 	initialise_monitor_handles();
 
-	int h[M] = { 1, 1, 1, 1, 1 }; //signal array
+	int h[M] = { 1, 1, 8, 1, 9 }; //signal array
 	int x[N] = { 1, 1, 1, 1, 1 }; //kernel array
 	int lenY = M + N - 1;
 

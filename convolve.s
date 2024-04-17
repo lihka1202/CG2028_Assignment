@@ -21,7 +21,6 @@
 @ Write Student 2’s Name here:
 
 @ You could create a look-up table of registers here:
-
 @ R0 h[M]: signal
 @ R1 x[N]: kernel
 @ R2 M
@@ -50,7 +49,10 @@ convolve:
 
 	@ Length = M + N - 1
 	ADD R11, R2, R3
-	SUB R11, #1
+	SUB R11, #1		@ 0x024BB001
+
+	@ Allocate memory at RESULT
+	.lcomm RESULT 400
 
 	@ Pointer to allocated memory at RESULT
 	LDR R12, =RESULT
@@ -72,9 +74,9 @@ ITERATE_LENGTH:
 	MOV R10, #0
 length_loop:
 	BL KERNEL
-	ADD R10, #1
-	CMP R10, R11
-	BNE length_loop
+	ADD R10, #1			@ 0x028AA001
+	CMP R10, R11		@ 0x015A000B
+	BNE length_loop		@ 0x18000024
 
 	@ Return to convolve
 	POP {R14}
@@ -85,7 +87,7 @@ KERNEL:
 	PUSH {R14}			// Return address to length_loop
 
 	@ x_start
-	SUB R4, R10, R2
+	SUB R4, R10, R2		@ 0x004A4002
 	ADDS R4, #1
 	IT MI				// If smaller than 0, take MAX = 0
 	MOVMI R4, #0
@@ -122,7 +124,7 @@ ITERATE_KERNEL:
 	PUSH {R14}		// Return address to KERNEL
 kernel_loop:
 	@ h[h_start]
-	MOV R4, R8
+	MOV R4, R8		@ 0x01A04008
 	MOV R5, R0
 	BL ACCESS_INDEX
 	PUSH {R5}
@@ -135,8 +137,8 @@ kernel_loop:
 
 	@ POP elements, multiply, add to sum
 	POP {R4-R5}
-	MUL R4, R5
-	ADD R9, R4
+	MUL R4, R5		@ 0x00004514
+	ADD R9, R4		@ 0x00899004
 
 	@ Update loop
 	SUBS R8, #1		// Decrement h_start
@@ -145,7 +147,7 @@ kernel_loop:
 	BMI kernel_loop
 
 	@ Store sum in RESULT and increment address
-	STR R9, [R12], #4
+	STR R9, [R12], #4	@ 0x048C9004
 
 	@ Return to KERNEL
 	POP {R14}
@@ -160,9 +162,5 @@ ACCESS_INDEX:
 	SUBS R4, #1			// Decrement index count
 	BGT ACCESS_INDEX
 
-	LDR R5, [R5]		// Return element
+	LDR R5, [R5]		// Return element	@ 0x05955000
 	BX LR
-
-
-@ Allocate memory at RESULT
-.lcomm RESULT 400
